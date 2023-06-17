@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enflasyon Oranı Hesaplayıcı</title>
+    <style>
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enflasyon Oranı Hesaplayıcı</h1>
+
+    <div class="input-group">
+        <label for="current-price">Mevcut Fiyat:</label>
+        <input type="number" id="current-price">
+    </div>
+
+    <div class="input-group">
+        <label for="previous-price">Önceki Fiyat:</label>
+        <input type="number" id="previous-price">
+    </div>
+
+    <button onclick="calculateInflationRate()">Hesapla</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateInflationRate() {
+            var currentPrice = parseFloat(document.getElementById("current-price").value);
+            var previousPrice = parseFloat(document.getElementById("previous-price").value);
+
+            if (!isNaN(currentPrice) && !isNaN(previousPrice)) {
+                var inflationRate = ((currentPrice - previousPrice) / previousPrice) * 100;
+
+                var resultElement = document.getElementById("result");
+                resultElement.textContent = "Enflasyon Oranı: " + inflationRate.toFixed(2) + "%";
+            }
+        }
+    </script>
+</body>
+</html>
