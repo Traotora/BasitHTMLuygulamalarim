@@ -1,1 +1,1 @@
-# BasitHTMlUygulamarim
+# BasitHTMlUygulamalarim
