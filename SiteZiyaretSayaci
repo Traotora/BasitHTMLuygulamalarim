@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Ziyaret Sayacı</title>
+</head>
+<body>
+    
+    <p>Bu sayfa <span id="visit-count"></span> kez ziyaret edildi.</p>
+
+    <script>
+        // Tarayıcı yerel depolamasında ziyaretçi sayısını alma
+        let visitCount = localStorage.getItem('visitCount');
+
+        // Eğer ziyaretçi sayısı yoksa, sıfırdan başla
+        if (visitCount === null) {
+            visitCount = 0;
+        } else {
+            visitCount = parseInt(visitCount);
+        }
+
+        // Ziyaretçi sayısını bir artır
+        visitCount += 1;
+
+        // Yeni ziyaretçi sayısını yerel depolamaya kaydet
+        localStorage.setItem('visitCount', visitCount);
+
+        // Ziyaretçi sayısını HTML'de göster
+        document.getElementById('visit-count').innerText = visitCount;
+    </script>
+</body>
+</html>
