@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kar Yağışı Efekti</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #1e3c72, #2a5298); /* Mavi bir arka plan */
+      height: 100vh;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 10px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Kar tanesi oluşturucu fonksiyon
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+
+      // Rastgele başlangıç konumunu ve boyutunu ayarla
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+      snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+
+      // Kar tanesini sayfaya ekle
+      document.body.appendChild(snowflake);
+
+      // Kar tanesi aşağı indikten sonra kaldır
+      snowflake.addEventListener('animationend', () => {
+        snowflake.remove();
+      });
+    }
+
+    // Her 200 milisaniyede bir yeni kar tanesi oluştur
+    setInterval(createSnowflake, 200);
+  </script>
+</body>
+</html>
