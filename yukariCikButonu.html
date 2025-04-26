@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yukarı Çık Butonu</title>
+  <style>
+    body {
+      min-height: 2000px; /* Sayfayı uzatmak için */
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #yukariButonu {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      z-index: 99;
+      font-size: 18px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      outline: none;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: none; /* Başlangıçta gizli */
+      transition: background-color 0.3s;
+    }
+
+    #yukariButonu:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sayfanın İçeriği</h1>
+  <p>Buraya bolca içerik ekleyebilirsin. Sayfa uzadıkça buton ortaya çıkacak.</p>
+
+  <button id="yukariButonu" onclick="yukariCik()">⬆ Yukarı Çık</button>
+
+  <script>
+    // Butonu seç
+    const yukariButonu = document.getElementById('yukariButonu');
+
+    // Kullanıcı sayfada aşağı kayınca butonu göster
+    window.onscroll = function() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        yukariButonu.style.display = "block";
+      } else {
+        yukariButonu.style.display = "none";
+      }
+    };
+
+    // Butona basınca en üste kaydır
+    function yukariCik() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
+</body>
+</html>
