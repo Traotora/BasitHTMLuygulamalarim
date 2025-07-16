@@ -1,0 +1,81 @@
+<div id="custom-comments-section">
+  <h3>Yorumlar</h3>
+  <div id="comments-container"></div>
+  
+  <h3>Yorum Ekle</h3>
+  <form id="comment-form">
+    <input type="text" id="comment-name" placeholder="Adınız" required>
+    <textarea id="comment-text" placeholder="Yorumunuz" required></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+  <h5>made by traotora</h5>
+</div>
+
+<style>
+  #custom-comments-section {
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px solid #eee;
+  }
+  #comments-container .comment {
+    margin: 15px 0;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  #comment-form textarea {
+    width: 100%;
+    min-height: 100px;
+    margin: 10px 0;
+  }
+</style>
+
+<script>
+// Basit bir localStorage tabanlı yorum sistemi
+document.addEventListener('DOMContentLoaded', function() {
+  const postId = window.location.pathname;
+  const form = document.getElementById('comment-form');
+  const container = document.getElementById('comments-container');
+  
+  // Yorumları yükle
+  loadComments();
+  
+  // Form gönderimi
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const comment = {
+      name: document.getElementById('comment-name').value,
+      text: document.getElementById('comment-text').value,
+      date: new Date().toLocaleString(),
+      postId: postId
+    };
+    
+    saveComment(comment);
+    form.reset();
+    loadComments();
+  });
+  
+  function saveComment(comment) {
+    let comments = JSON.parse(localStorage.getItem('blogComments') || '[]');
+    comments.push(comment);
+    localStorage.setItem('blogComments', JSON.stringify(comments));
+  }
+  
+  function loadComments() {
+    let comments = JSON.parse(localStorage.getItem('blogComments') || '[]');
+    comments = comments.filter(c => c.postId === postId);
+    
+    container.innerHTML = '';
+    comments.forEach(comment => {
+      const div = document.createElement('div');
+      div.className = 'comment';
+      div.innerHTML = `
+        <strong>${comment.name}</strong>
+        <small>${comment.date}</small>
+        <p>${comment.text}</p>
+      `;
+      container.appendChild(div);
+    });
+  }
+});
+</script>
